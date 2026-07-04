@@ -1,0 +1,210 @@
+/* =========================================================
+   bloodmoon.css
+   Black + Crimson
+   Inspired by exploit frameworks / red team aesthetics
+   ========================================================= */
+
+Screen {
+    background: #070707;
+    color: #ffd9df;
+}
+
+#target-info {
+    height: 3;
+    border: solid #ff1744;
+    background: #120b0d;
+    color: #ff6b81;
+    content-align: center middle;
+    text-style: bold;
+}
+
+.panel {
+    border: round #3a1018;
+    background: #0f0a0b;
+    padding: 1;
+}
+
+.panel:focus-within {
+    border: round #ff1744;
+}
+
+#sidebar {
+    width: 20%;
+    background: #00000000;
+}
+
+#scan-menu {
+    height: 2fr;
+}
+
+#scan-tracker {
+    width: 28%;
+}
+
+#main-area {
+    width: 80%;
+}
+
+#scan-detail {
+    width: 72%;
+}
+
+.panel-title {
+    color: #ff1744;
+    text-style: bold;
+}
+
+Tree {
+    background: transparent;
+    color: #ffd9df;
+}
+
+Tree:focus {
+    background: transparent;
+}
+
+Tree > .tree--guides {
+    color: #341018;
+}
+
+Tree > .tree--cursor {
+    background: #2a0f16;
+    color: #ff5c75;
+    text-style: bold;
+}
+
+Tree > .tree--highlight {
+    background: #1b0c10;
+    color: #ff1744;
+}
+
+RichLog {
+    background: #040404;
+    color: #ffd9df;
+    border: blank;
+}
+
+RichLog:focus {
+    border: round #ff1744;
+}
+
+ListView {
+    background: #100b0d;
+    border: round #3a1018;
+}
+
+ListItem {
+    color: #ffd9df;
+    padding: 0 1;
+    transition: background 200ms;
+}
+
+ListItem.--highlight {
+    background: #2a0f16;
+    color: #ff5c75;
+    text-style: bold;
+}
+
+Input {
+    background: #170f12;
+    border: round #3a1018;
+    color: #ffd9df;
+}
+
+Input:focus {
+    border: round #ff1744;
+}
+
+Button {
+    background: #101010;
+    color: #ffd9df;
+
+    border: round #3a1018;
+
+    text-style: bold;
+
+    min-width: 16;
+}
+
+Button:hover {
+    background: #1a1416;
+
+    border: round #ff4d6d;
+
+    color: #ff8aa0;
+}
+
+Button:focus {
+    border: round #ff1744;
+}
+
+Button.-success {
+    background: #101010;
+
+    border: round #ff1744;
+
+    color: #ff8aa0;
+}
+
+Button.-error {
+    background: #101010;
+
+    border: round #ff4d4d;
+
+    color: #ff8080;
+}
+
+.active-scan {
+    color: #ff5c75;
+}
+
+.completed-scan-ok {
+    color: #ff1744;
+}
+
+.completed-scan-fail {
+    color: #ff4d4d;
+}
+
+#modal-dialog {
+    width: 100%;
+    height: 100%;
+
+    border: round #ff1744;
+
+    padding: 1 2;
+}
+
+#modal-form {
+    height: 1fr;
+
+    overflow-y: auto;
+
+    margin-bottom: 1;
+}
+
+#command-preview {
+    height: 5;
+
+    border: round #3a1018;
+
+    background: #050505;
+
+    color: #ffd9df;
+
+    padding: 1;
+
+    margin-bottom: 1;
+}
+
+#modal-actions {
+    height: 3;
+
+    align: left middle;
+}
+
+#modal-actions Button {
+    width: 16;
+
+    margin-right: 1;
+}

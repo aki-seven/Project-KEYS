@@ -1,0 +1,291 @@
+Screen {
+    background: #08080d;
+    color: #e0d7ff;
+}
+
+#target-info {
+    height: 3;
+
+    border: solid #5b00a6;
+
+    background: #101018;
+
+    color: #ff3b3b;
+
+    content-align: center middle;
+
+    text-style: bold;
+}
+
+.panel {
+
+    border: round #2b1748;
+
+    background: #101018;
+
+    padding: 1;
+
+    transition:
+        border 180ms,
+        background 180ms;
+}
+
+.panel:hover {
+
+    border: round #44206f;
+
+    background: #12121c;
+}
+
+.panel:focus-within {
+
+    border: round #ff3b3b;
+
+    background: #14141f;
+}
+
+#sidebar {
+
+    width: 20%;
+
+    background: #0d0d1400;
+}
+
+#scan-menu {
+    height: 2fr;
+}
+
+#scan-tracker {
+    width: 28%;
+}
+
+#main-area {
+    width: 80%;
+}
+
+#scan-detail {
+
+    width: 72%;
+
+    border: round #3d1d63;
+}
+
+#scan-detail:focus-within {
+
+    border: round #ff3b3b;
+}
+
+.panel-title {
+
+    color: #5b00a6;
+
+    text-style: bold;
+
+    padding-left: 1;
+}
+
+Tree {
+
+    background: transparent;
+
+    color: #e0d7ff;
+}
+
+Tree:focus {
+    background: transparent;
+}
+
+Tree > .tree--guides {
+    color: #2b1748;
+}
+
+Tree > .tree--cursor {
+
+    background: #101d33;
+
+    color: #ff3b3b;
+
+    text-style: bold;
+}
+
+Tree > .tree--highlight {
+
+    background: #161022;
+
+    color: #5b00a6;
+}
+
+RichLog {
+
+    background: #050507;
+
+    color: #e0d7ff;
+
+    border: round #161022;
+
+    padding: 0 1;
+}
+
+RichLog:focus {
+
+    border: round #ff3b3b;
+}
+
+ListView {
+
+    background: #101018;
+
+    border: round #2b1748;
+}
+
+ListItem {
+
+    color: #e0d7ff;
+
+    padding: 0 1;
+
+    transition:
+        background 150ms,
+        color 150ms;
+}
+
+ListItem.--highlight {
+
+    background: #161f33;
+
+    color: #ff3b3b;
+
+    text-style: bold;
+}
+
+Input {
+
+    background: #141420;
+
+    border: round #2b1748;
+
+    color: #e0d7ff;
+}
+
+Input:focus {
+
+    border: round #ff3b3b;
+}
+
+Button {
+
+    background: #101018;
+
+    color: #e0d7ff;
+
+    border: round #2b1748;
+
+    text-style: bold;
+
+    min-width: 16;
+
+    transition:
+        background 150ms,
+        border 150ms,
+        color 150ms;
+}
+
+Button:hover {
+
+    background: #181420;
+
+    border: round #7a2cff;
+
+    color: #c084ff;
+}
+
+Button:focus {
+
+    border: round #5b00a6;
+}
+
+Button.-success {
+
+    background: #101018;
+
+    border: round #5b00a6;
+
+    color: #c084ff;
+}
+
+Button.-error {
+
+    background: #101018;
+
+    border: round #ff3b3b;
+
+    color: #ff6b6b;
+}
+
+.active-scan {
+
+    color: #ff3b3b;
+
+    text-style: bold;
+}
+
+.completed-scan-ok {
+
+    color: #7a2cff;
+}
+
+.completed-scan-fail {
+
+    color: #ff3b3b;
+}
+
+#modal-dialog {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: round #5b00a6;
+
+    background: #0c0c12;
+
+    padding: 1 2;
+}
+
+#modal-form {
+
+    height: 1fr;
+
+    overflow-y: auto;
+
+    margin-bottom: 1;
+}
+
+#command-preview {
+
+    height: 5;
+
+    border: round #2b1748;
+
+    background: #050507;
+
+    color: #e0d7ff;
+
+    padding: 1;
+
+    margin-bottom: 1;
+}
+
+#modal-actions {
+
+    height: 3;
+
+    align: left middle;
+}
+
+#modal-actions Button {
+
+    width: 16;
+
+    margin-right: 1;
+}

@@ -1,0 +1,2 @@
+recursive-include src/keys/config *.yaml *.json
+recursive-include src/keys/tui/themes *.css

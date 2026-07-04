@@ -1,0 +1,4 @@
+textual
+pyyaml
+pydantic
+pyperclip

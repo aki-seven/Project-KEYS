@@ -1,0 +1,297 @@
+/* =========================================================
+   emberstrike.css
+   Black + Orange theme
+   Inspired by terminal lava / offensive tooling aesthetics
+   ========================================================= */
+
+Screen {
+    background: #070707;
+    color: #ffd7b0;
+}
+
+#target-info {
+    height: 3;
+
+    border: solid #ff6a00;
+
+    background: #111111;
+
+    color: #ffb347;
+
+    content-align: center middle;
+
+    text-style: bold;
+}
+
+.panel {
+
+    border: round #3a1d08;
+
+    background: #101010;
+
+    padding: 1;
+
+    transition:
+        border 180ms,
+        background 180ms;
+}
+
+.panel:hover {
+
+    border: round #5a2f12;
+
+    background: #141414;
+}
+
+.panel:focus-within {
+
+    border: round #ff6a00;
+
+    background: #18120d;
+}
+
+#sidebar {
+
+    width: 20%;
+
+    background: #0d0d0d00;
+}
+
+#scan-menu {
+    height: 2fr;
+}
+
+#scan-tracker {
+    width: 28%;
+}
+
+#main-area {
+    width: 80%;
+}
+
+#scan-detail {
+
+    width: 72%;
+
+    border: round #4d260c;
+}
+
+#scan-detail:focus-within {
+
+    border: round #ff6a00;
+}
+
+.panel-title {
+
+    color: #ff6a00;
+
+    text-style: bold;
+
+    padding-left: 1;
+}
+
+Tree {
+
+    background: transparent;
+
+    color: #ffd7b0;
+}
+
+Tree:focus {
+    background: transparent;
+}
+
+Tree > .tree--guides {
+    color: #40210d;
+}
+
+Tree > .tree--cursor {
+
+    background: #241200;
+
+    color: #ff8c1a;
+
+    text-style: bold;
+}
+
+Tree > .tree--highlight {
+
+    background: #1b120d;
+
+    color: #ff6a00;
+}
+
+RichLog {
+
+    background: #050505;
+
+    color: #ffd7b0;
+
+    border: round #241200;
+
+    padding: 0 1;
+}
+
+RichLog:focus {
+
+    border: round #ff6a00;
+}
+
+ListView {
+
+    background: #111111;
+
+    border: round #3a1d08;
+}
+
+ListItem {
+
+    color: #ffd7b0;
+
+    padding: 0 1;
+
+    transition:
+        background 150ms,
+        color 150ms;
+}
+
+ListItem.--highlight {
+
+    background: #241200;
+
+    color: #ff8c1a;
+
+    text-style: bold;
+}
+
+Input {
+
+    background: #161616;
+
+    border: round #3a1d08;
+
+    color: #ffd7b0;
+}
+
+Input:focus {
+
+    border: round #ff6a00;
+}
+
+Button {
+
+    background: #101010;
+
+    color: #ffd7b0;
+
+    border: round #3a1d08;
+
+    text-style: bold;
+
+    min-width: 16;
+
+    transition:
+        background 150ms,
+        border 150ms,
+        color 150ms;
+}
+
+Button:hover {
+
+    background: #1a1a1a;
+
+    border: round #ff8c1a;
+
+    color: #ffb347;
+}
+
+Button:focus {
+
+    border: round #ff6a00;
+}
+
+Button.-success {
+
+    background: #101010;
+
+    border: round #ff6a00;
+
+    color: #ffb347;
+}
+
+Button.-error {
+
+    background: #101010;
+
+    border: round #ff3b30;
+
+    color: #ff6b60;
+}
+
+.active-scan {
+
+    color: #ff8c1a;
+
+    text-style: bold;
+}
+
+.completed-scan-ok {
+
+    color: #ff6a00;
+}
+
+.completed-scan-fail {
+
+    color: #ff3b30;
+}
+
+#modal-dialog {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: round #ff6a00;
+
+    background: #0c0c0c;
+
+    padding: 1 2;
+}
+
+#modal-form {
+
+    height: 1fr;
+
+    overflow-y: auto;
+
+    margin-bottom: 1;
+}
+
+#command-preview {
+
+    height: 5;
+
+    border: round #3a1d08;
+
+    background: #050505;
+
+    color: #ffd7b0;
+
+    padding: 1;
+
+    margin-bottom: 1;
+}
+
+#modal-actions {
+
+    height: 3;
+
+    align: left middle;
+}
+
+#modal-actions Button {
+
+    width: 16;
+
+    margin-right: 1;
+}

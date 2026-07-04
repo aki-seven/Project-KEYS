@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Keys"
+version = "1.0.0"
+description = "Initial Access Intelligence (IAI) - Reconnaissance Framework"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "textual",
+    "rich",
+    "pyyaml",
+    "pydantic",
+    "pyperclip"
+]
+
+authors = [
+    { name = "aki-seven" }
+]
+
+keywords = [
+    "cybersecurity",
+    "recon",
+    "pentesting",
+    "tui",
+    "scanner"
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Environment :: Console",
+    "Topic :: Security",
+]
+
+[project.scripts]
+keys = "keys.main:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"keys.tui" = ["themes/*.css"]
+"keys" = [
+    "config/**/*.yaml",
+    "config/**/*.json"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

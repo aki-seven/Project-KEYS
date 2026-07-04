@@ -1,468 +1,325 @@
-KEYS — Initial Access Intelligence (IAI)
+<div align="center">
 
-Modular reconnaissance and enumeration framework built for offensive security workflows.
-Designed around asynchronous execution, service-aware automation, YAML-driven extensibility, and a live TUI interface.
+```
+    ██╗  ██╗ ████████╗ ██╗   ██╗ ███████╗
+    ██║ ██╔╝ ██╔═════╝ ╚██╗ ██╔╝ ██╔════╝
+    █████╔╝  ██████╗    ╚████╔╝  ███████╗
+    ██╔═██╗  ██╔═══╝     ╚██╔╝   ╚════██║
+    ██║  ██╗ ████████╗    ██║    ███████║
+    ╚═╝  ╚═╝ ╚═══════╝    ╚═╝    ╚══════╝
+```
 
-Overview
+# KEYS — Initial Access Intelligence (IAI)
 
-KEYS is a Python-based reconnaissance orchestration framework focused on:
+**Modular reconnaissance and enumeration framework for offensive security workflows.**
 
-Automated enumeration
-Service-aware scan recommendations
-Concurrent task execution
-Config-driven scan management
-Real-time TUI monitoring
-Modular offensive tooling integration
+Async execution · Service-aware automation · YAML-driven scans · Live TUI
 
-Unlike traditional wrapper scripts, KEYS is structured more like an execution platform:
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![OS: Linux](https://img.shields.io/badge/OS-Kali%20Linux-informational?logo=linux)](https://www.kali.org/)
 
-scans are abstracted into YAML definitions
-execution is managed through a scheduler
-scans are fingerprinted to prevent duplicates
-resource locking prevents conflicts
-asynchronous workers stream live output
-state is centrally tracked and updated in real time
+</div>
 
-The framework is intended for:
+---
 
-penetration testing
-lab environments
-HTB / CTF workflows
-internal security assessments
-reconnaissance automation research
-Features
-Core Features
-Async concurrent scan execution
-Live Textual-based TUI
-YAML-driven scan definitions
-Duplicate scan prevention
-Resource locking system
-Queue + scheduler architecture
-Real-time scan output streaming
-Centralized state tracking
-Service-aware enumeration
-Structured execution contexts
-Automatic logging
-Theme engine support
-Supported Tooling
-Network
-Nmap
-Masscan
-Web
-FFUF
-Gobuster
-Feroxbuster
-Nikto
-Nuclei
-WPScan
-SMB
-Enum4Linux
-SMBMap
-SMBClient
-NetExec
-Brute Force
-Hydra
-SMTP
-smtp-user-enum
-SNMP
-snmpwalk
-Architecture
-High-Level Design
-                +----------------------+
-                |      Textual TUI     |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |    Worker Manager    |
-                +----------+-----------+
-                           |
-            +--------------+--------------+
-            |                             |
-            v                             v
- +-------------------+        +-------------------+
- |     Scheduler     |        | Resource Locking  |
- +-------------------+        +-------------------+
-            |
-            v
- +-------------------+
- | Execution Context |
- +-------------------+
-            |
-            v
- +-------------------+
- | Async Workers     |
- +-------------------+
-            |
-            v
- +-------------------+
- | External Tools    |
- +-------------------+
-Execution Pipeline
-1. Bootstrap Validation
+## Overview
 
-Before startup, KEYS validates:
+KEYS is a Python-based reconnaissance orchestration framework built around:
 
-Python version
-required Python packages
-required offensive security tools
+- **YAML-driven scan definitions** — add new tools without touching Python
+- **Async concurrent execution** — run multiple scans in parallel
+- **Resource locking** — prevent tool conflicts on the same target
+- **Scan fingerprinting** — SHA256-based duplicate prevention
+- **Live TUI** — real-time monitoring via Textual
+- **Service-aware automation** — scans respond to discovered intelligence
 
-Implemented in:
+### Use Cases
 
-keys/core/bootstrap.py
-2. Config Loading
+| Scenario | Fit |
+|---|---|
+| Penetration testing | ✅ |
+| HTB / CTF workflows | ✅ |
+| Internal security assessments | ✅ |
+| Lab environments | ✅ |
+| Recon automation research | ✅ |
 
-All scans are loaded dynamically from YAML.
+---
 
-keys/config/scans/
+## Features
 
-Each scan contains:
+| Feature | Description |
+|---|---|
+| Async scan orchestration | Concurrent execution via asyncio workers |
+| YAML scan definitions | Config-driven — no hardcoded scan logic |
+| Live TUI | Real-time Textual-based terminal interface |
+| Resource locking | Prevents conflicting scans on same service |
+| Duplicate prevention | SHA256 fingerprinting per scan |
+| Queue + scheduler | Concurrency-aware dispatching |
+| State tracking | Centralized ports, services, findings |
+| Automatic logging | All output saved to `~/Intel/Reports/` |
+| Theme engine | 4 built-in themes with live switching |
+| Modular tooling | Nmap, FFUF, Gobuster, Nuclei, Hydra & more |
 
-category
-service mapping
-parameters
-command template
-descriptions
-tags
+---
 
-Example:
+## Supported Tools
 
-- category: Enumeration
-  subcategory: Web
-  group: Gobuster
+| Category | Tools |
+|---|---|
+| **Network** | Nmap, Masscan |
+| **Web** | FFUF, Gobuster, Feroxbuster, Nikto, Nuclei, WPScan |
+| **SMB** | Enum4Linux, SMBMap, SMBClient, NetExec |
+| **Brute Force** | Hydra |
+| **SMTP** | smtp-user-enum |
+| **SNMP** | snmpwalk |
 
-  name: Gobuster Directories
-  tool: gobuster
+---
 
-  command: gobuster dir -u {url} -w {wordlist}
+## Architecture
 
-No hardcoded scan logic is required.
+```
+                    ┌──────────────────────┐
+                    │     Textual TUI      │
+                    └──────────┬───────────┘
+                               │
+                    ┌──────────▼───────────┐
+                    │    Worker Manager    │
+                    └──────────┬───────────┘
+                               │
+              ┌────────────────┴────────────────┐
+              │                                 │
+     ┌────────▼────────┐              ┌─────────▼────────┐
+     │    Scheduler    │              │ Resource Locking  │
+     └────────┬────────┘              └──────────────────┘
+              │
+     ┌────────▼────────┐
+     │ Execution Context│
+     └────────┬────────┘
+              │
+     ┌────────▼────────┐
+     │   Async Workers  │
+     └────────┬────────┘
+              │
+     ┌────────▼────────┐
+     │  External Tools  │
+     └─────────────────┘
+```
 
-3. Scheduling
+<details>
+<summary><strong>Execution Pipeline (click to expand)</strong></summary>
 
-The scheduler:
+1. **Bootstrap Validation** — checks Python version, packages, and system tools before startup
+2. **Config Loading** — scans loaded dynamically from `config/scans/` YAML files
+3. **Scheduling** — queue ordering, concurrency limits, duplicate prevention
+4. **Resource Locking** — key: `(target, service, port, protocol)` — prevents conflicts
+5. **Worker Execution** — isolated async workers with live output streaming
+6. **State Tracking** — centralized discovery of ports, services, and findings
 
-manages queue order
-enforces concurrency limits
-prevents duplicate scans
-handles dispatch logic
+</details>
 
-Implemented in:
+<details>
+<summary><strong>Concurrency Model (click to expand)</strong></summary>
 
-keys/execution/scheduler.py
-4. Resource Locking
+- `asyncio` + async subprocesses
+- Queue-based scheduling
+- Resource locks per service
+- Batched UI updates
+- Cancellable scan workers
 
-KEYS prevents conflicting scans from running simultaneously against the same service.
+</details>
 
-Resource key structure:
+---
 
-(target, service, port, protocol)
+## Installation
 
-This avoids:
+### Prerequisites
 
-duplicate scans
-unnecessary noise
-tool collisions
+- **Python** 3.10+
+- **OS** — Kali Linux (or any Debian-based distro with pentesting tools)
 
-Implemented in:
+### Quick Start
 
-keys/execution/locks.py
-5. Worker Execution
-
-Each scan executes inside an isolated async worker.
-
-Workers:
-
-stream live output
-batch UI updates
-log all output
-support cancellation
-manage subprocess lifecycle
-
-Implemented in:
-
-keys/execution/worker.py
-6. State Tracking
-
-Global intelligence state tracks:
-
-discovered ports
-services
-findings
-recommended services
-
-Implemented in:
-
-keys/core/state.py
-Project Structure
-Keys/
-├── config/
-├── src/
-│   └── keys/
-│       ├── config/
-│       │   └── scans/
-│       ├── core/
-│       ├── execution/
-│       ├── tui/
-│       └── main.py
-├── requirements.txt
-├── pyproject.toml
-└── dockerfile
-Directory Breakdown
-core/
-
-Framework internals.
-
-Contains
-bootstrap validation
-config parsing
-state management
-tool registry
-output parsers
-execution/
-
-Execution engine.
-
-Contains
-scheduler
-workers
-queue manager
-locks
-execution contexts
-fingerprinting
-logging
-
-This is effectively the orchestration layer.
-
-tui/
-
-Textual-based live interface.
-
-Contains
-widgets
-modals
-themes
-status bars
-event handling
-config/scans/
-
-YAML scan definitions.
-
-Framework behavior is largely driven from here.
-
-New scans can be added without touching Python code.
-
-Installation
-Requirements
-Python
-Python 3.10+
-Linux Tools
-nmap
-ffuf
-gobuster
-feroxbuster
-nikto
-nuclei
-hydra
-Clone Repository
-git clone <repo-url>
-cd Keys
-Install Python Dependencies
-pip install -r requirements.txt
-
-Or:
-
+```bash
+git clone https://github.com/aki-seven/Project-KEYS.git
+cd Project-KEYS
 pip install .
-Install System Tools (Debian/Kali)
+```
+
+### System Tools (Kali/Debian)
+
+```bash
 sudo apt install nmap ffuf gobuster feroxbuster hydra
+```
 
-Some tools require manual installation:
+Additional tools (manual install):
 
-nuclei
-nikto
-wpscan
-netexec
-Usage
-Launch Framework
+```bash
+# nuclei
+go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+
+# nikto
+sudo apt install nikto
+
+# wpscan
+gem install wpscan
+
+# netexec
+pip install netexec
+```
+
+### Docker
+
+```bash
+docker build -t keys .
+docker run -it keys <target>
+```
+
+---
+
+## Usage
+
+```bash
+# Basic usage
 keys <target>
 
-Example:
-
+# Examples
 keys 10.10.10.10
-
-Or:
-
 keys example.com
-Configuration
-Themes
+```
 
-Theme config:
+### Keybindings
 
-keys/config/theme.json
+| Key | Action |
+|---|---|
+| `Ctrl+Q` | Quit |
+| `Ctrl+S` | Save scan log |
+| `Ctrl+T` | Cycle theme |
+
+---
+
+## Configuration
+
+### Themes
+
+Change theme in `src/keys/config/theme.json`:
+
+```json
+{"theme": "ghostwire"}
+```
 
 Available themes:
 
-ghostwire
-bloodmoon
-emberstrike
-offsec
-Wordlists
+| Theme | Style |
+|---|---|
+| `ghostwire` | Black + Cyan/Steel |
+| `bloodmoon` | Dark + Red |
+| `emberstrike` | Dark + Orange |
+| `offsec` | Classic offsec green |
 
-Global wordlists:
+### Wordlists
 
-keys/config/scans/wordlists.yaml
+Edit wordlist paths in `src/keys/config/scans/wordlists.yaml` to match your distro.
 
-Modify paths based on your distro.
+### Adding New Scans
 
-Adding New Scans
+Create a YAML file in `src/keys/config/scans/`:
 
-Create a new YAML file:
-
-config/scans/custom/mytool.yaml
-
-Example:
-
+```yaml
 scans:
-
   - category: Enumeration
     subcategory: Custom
+    group: MyTool
 
-    name: Example Scan
-    tool: exampletool
-
+    name: My Custom Scan
+    tool: mytool
     services:
       - http
 
-    command: exampletool {target}
+    command: mytool -u {target} -w {wordlist}
 
     parameters:
       target:
         type: string
         default: ""
+      wordlist:
+        type: file
+        default: "/usr/share/wordlists/common.txt"
 
-    description: Example scan
+    description: Custom scan description
+```
 
-Framework auto-loads it at startup.
+The framework auto-loads it at startup — no code changes needed.
 
-Logging
+---
 
-All scan output is logged automatically.
+## Project Structure
 
-Default path:
+```
+Keys/
+├── src/keys/
+│   ├── config/          # YAML scan definitions + theme config
+│   │   └── scans/
+│   │       ├── network/
+│   │       ├── web/
+│   │       ├── smb/
+│   │       ├── ftp/
+│   │       ├── smtp/
+│   │       ├── snmp/
+│   │       ├── databases/
+│   │       └── brute_force/
+│   ├── core/            # Bootstrap, config loader, state, parsers, tools
+│   ├── execution/       # Scheduler, workers, locks, events, logging
+│   ├── tui/             # Textual app, components, modals, themes
+│   └── main.py          # Entry point
+├── config/              # Project-level config
+├── dockerfile
+├── pyproject.toml
+├── requirements.txt
+└── README.md
+```
 
+| Directory | Purpose |
+|---|---|
+| `core/` | Bootstrap validation, config parsing, state management, tool registry |
+| `execution/` | Scheduler, workers, queue, locks, contexts, fingerprinting, logging |
+| `tui/` | Textual widgets, modals, themes, status bars, event handling |
+| `config/scans/` | YAML scan definitions — framework behavior driven from here |
+
+---
+
+## Logging
+
+All scan output is automatically logged:
+
+```
 ~/Intel/Reports/<target>/<scan-name>/
+```
 
-Each execution gets a dedicated log file.
+Each execution gets a dedicated log file with full output.
 
-Concurrency Model
+---
 
-KEYS uses:
+## Security Notice
 
-asyncio
-async subprocesses
-queue scheduling
-resource locks
+> **This framework is intended for authorized testing, lab environments, research, and education only.**
+> Do not use against systems without explicit permission. Unauthorized access is illegal.
 
-Benefits:
+---
 
-scalable execution
-low blocking overhead
-live interactive output
-controlled parallelism
-Design Philosophy
+## Tech Stack
 
-KEYS was designed around several principles:
+| Component | Technology |
+|---|---|
+| Language | Python 3.10+ |
+| Async | asyncio |
+| TUI | Textual |
+| Rich output | Rich |
+| Config | YAML + Pydantic |
+| Packaging | pyproject.toml (setuptools) |
 
-1. Config Over Hardcoding
+---
 
-Most framework behavior should come from configuration.
+## Author
 
-2. Service-Aware Execution
-
-Scans should respond to discovered intelligence dynamically.
-
-3. Orchestration First
-
-The framework is intended to coordinate tools rather than replace them.
-
-4. Extensibility
-
-New scan categories should require minimal code changes.
-
-5. Real-Time Visibility
-
-Operators should always see:
-
-queue state
-running scans
-output
-failures
-findings
-Current Capabilities
-Async scan orchestration
-Queue management
-TUI execution monitoring
-Modular YAML scans
-Duplicate prevention
-Service-aware scan grouping
-Scan fingerprinting
-Log persistence
-Theme system
-
-Security Notice
-
-This framework is intended for:
-
-authorized testing
-lab environments
-research
-education
-
-Do not use against systems without permission.
-
-Technical Highlights
-Scheduler Design
-
-The scheduler supports:
-
-active fingerprint tracking
-pending fingerprint tracking
-dynamic dispatching
-concurrency-aware scheduling
-Fingerprinting
-
-Each scan receives a SHA256 fingerprint built from:
-
-target
-service
-port
-protocol
-command
-
-This prevents redundant execution.
-
-Resource Isolation
-
-Execution contexts encapsulate:
-
-scan metadata
-parameters
-runtime state
-target intelligence
-Packaging
-
-Project uses modern Python packaging via:
-
-pyproject.toml
-
-CLI entrypoint:
-
-[project.scripts]
-keys = "keys.main:main"
-Tech Stack
-Python
-asyncio
-Textual
-Rich
-YAML
-Pydantic
+**aki-seven** — [GitHub](https://github.com/aki-seven)
